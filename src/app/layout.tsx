@@ -1,9 +1,10 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Geist, Geist_Mono, MedievalSharp} from "next/font/google";
 import "./globals.css";
 import { Container } from '@/app/components/Container';
 import { AppWrapper } from '@/app/components/AppWrapper';
 import Image from 'next/image';
+import { Footer } from './components/Footer';
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -13,6 +14,12 @@ const geistSans = Geist({
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
   subsets: ["latin"],
+});
+
+const medievalSharp = MedievalSharp({
+  variable: "--font-medieval-sharp",
+  subsets: ["latin-ext"],
+  weight: ["400"],
 });
 
 export const metadata: Metadata = {
@@ -28,7 +35,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} ${medievalSharp.variable} antialiased`}
       >
         <Container>
           <AppWrapper>
@@ -41,7 +48,7 @@ export default function RootLayout({
             <div className="relative w-[calc(100%+6rem)] h-[200px] left-[-3rem]">
               <Image src="/bottom.webp" alt="Bottom forest" fill />
             </div>
-            <div className="pt-6 text-sm text-grey flex justify-end">dasd</div>
+            <Footer />
           </AppWrapper>
         </Container>
       </body>

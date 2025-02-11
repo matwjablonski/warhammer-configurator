@@ -1,4 +1,4 @@
-import { InitialStep } from '../components/Configurator/InitialStep';
+import { InitialStep } from './components/CurrentStep';
 
 export default function Page() {
 

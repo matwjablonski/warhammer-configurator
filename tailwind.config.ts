@@ -19,6 +19,9 @@ export default {
         grey: "var(--grey)",
         'dark-grey': "var(--dark-grey)",
       },
+      fontFamily: {
+        medieval: ["var(--font-medieval-sharp)"],
+      }
     },
   },
   plugins: [],
