@@ -5,6 +5,7 @@ import { useConfiguratorStore } from '../../store/useConfiguratorStore';
 import { useEffect, useState } from 'react';
 import { Title } from '../Title';
 import { Navigation } from '../Navigation';
+import { Question } from '../Question';
 
 export const InitialStep = () => {
   const { step, setStep } = useConfiguratorStore();
@@ -28,10 +29,12 @@ export const InitialStep = () => {
   }
 
   return data.currentStep ? (
-    
       <div className="p-4 overflow-hidden"> 
         <Title orderNo={step}>{data.currentStep.title}</Title>
         <p>{data.currentStep.description}</p>
+        {data.currentStep.questions && data.currentStep.questions.map((question) => (
+          <Question key={question.id} {...question} />
+        ))}
         <Navigation
           shouldShowFinishBtn={shouldShowFinishBtn}
           shouldShowNextBtn={shouldShowNextBtn}

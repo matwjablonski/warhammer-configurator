@@ -1,0 +1,74 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id         String   @id @default(cuid())
+  email      String   @unique
+  hashedPass String
+  name       String
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+  heroes     Hero[]
+}
+
+model Hero {
+  id            String      @id @default(cuid())
+  name          String
+  age           Int
+  height        Int
+  hair          String
+  eyes          String
+  status        String
+  raceId        String      @map("race_id")
+  race          Race        @relation(fields: [raceId], references: [id])
+  classId       String      @map("class_id")
+  class         Class       @relation(fields: [classId], references: [id])
+  careerId      String      @map("career_id")
+  career        Career      @relation(fields: [careerId], references: [id])
+  careerLevelId String      @map("career_level_id")
+  careerLevel   CareerLevel @relation(fields: [careerLevelId], references: [id])
+  userId        String      @map("user_id")
+  user          User        @relation(fields: [userId], references: [id])
+}
+
+model Race {
+  id          String @id @default(cuid())
+  name        String
+  minDiceRoll Int
+  maxDiceRoll Int
+  Hero        Hero[]
+}
+
+model Class {
+  id   String @id @default(cuid())
+  name String
+  Hero Hero[]
+}
+
+model Career {
+  id          String        @id @default(cuid())
+  name        String
+  Hero        Hero[]
+  CareerLevel CareerLevel[]
+}
+
+model CareerLevel {
+  id        String @id @default(cuid())
+  careerId  String
+  career    Career @relation(fields: [careerId], references: [id])
+  level     Int
+  expNeeded Int
+  Hero      Hero[]
+}
