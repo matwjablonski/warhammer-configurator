@@ -50,4 +50,5 @@ export type Hero = {
     [key: string]: Roll;
   }
   race?: HeroProperty;
+  class?: HeroProperty;
 } 
