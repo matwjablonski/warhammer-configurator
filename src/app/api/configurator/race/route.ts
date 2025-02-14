@@ -7,6 +7,10 @@ const POST = async (req: NextRequest) => {
   
     const race = await getRaceByDiceRoll(body.diceRoll);
 
+    if (!race) {
+      throw new Error('Błąd podczas pobierania rasy.');
+    }
+
     return NextResponse.json({
       race: {
         name: race.name,
