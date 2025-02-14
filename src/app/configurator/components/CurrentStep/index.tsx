@@ -16,8 +16,10 @@ export const InitialStep = () => {
   };
 
   useEffect(() => {
-    setNewHero({})
-  }, []);
+    setNewHero({
+      rolls: {}
+    })
+  }, [setNewHero]);
   
   useEffect(() => {
     getData(step)
