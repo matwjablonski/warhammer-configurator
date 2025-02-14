@@ -1,4 +1,4 @@
-import { Step } from '../../configurator/steps';
+import { Step } from '../../configurator/types';
 
 export type StepResponse = {
   currentStep: Step | null;

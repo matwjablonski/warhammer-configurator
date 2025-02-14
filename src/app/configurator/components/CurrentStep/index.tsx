@@ -4,44 +4,32 @@ import { getCurrentStep, StepResponse } from '@/app/lib/requests/configurator/cu
 import { useConfiguratorStore } from '../../store/useConfiguratorStore';
 import { useEffect, useState } from 'react';
 import { Title } from '../Title';
-import { Navigation } from '../Navigation';
-import { Question } from '../Question';
+import { CurrentStepForm } from '../CurrentStepForm';
 
 export const InitialStep = () => {
-  const { step, setStep } = useConfiguratorStore();
+  const { step, setNewHero } = useConfiguratorStore();
   const [data, setData] = useState<StepResponse>({ currentStep: null, totalSteps: 0 });
-
-  const shouldShowNextBtn = data && data.totalSteps - 1 > step;
-  const shouldShowPrevBtn = step > 0;
-  const shouldShowFinishBtn = data && data.totalSteps - 1 === step;
 
   const getData = async (step: number) => {
     const res = await getCurrentStep(step);
     setData(res);
   };
+
+  useEffect(() => {
+    setNewHero({})
+  }, []);
   
   useEffect(() => {
     getData(step)
   }, [step]);
 
-  const nextStep = () => {
-    setStep(step + 1);
-  }
-
   return data.currentStep ? (
       <div className="p-4 overflow-hidden"> 
         <Title orderNo={step}>{data.currentStep.title}</Title>
         <p>{data.currentStep.description}</p>
-        {data.currentStep.questions && data.currentStep.questions.map((question) => (
-          <Question key={question.id} {...question} />
-        ))}
-        <Navigation
-          shouldShowFinishBtn={shouldShowFinishBtn}
-          shouldShowNextBtn={shouldShowNextBtn}
-          shouldShowPrevBtn={shouldShowPrevBtn}
-          nextStep={nextStep}
-          prevStep={() => setStep(step - 1)}
-        />
+        {data.currentStep && data.currentStep.questions && (
+          <CurrentStepForm questions={data.currentStep.questions} totalSteps={data.totalSteps} />
+        )}
       </div>
     
     

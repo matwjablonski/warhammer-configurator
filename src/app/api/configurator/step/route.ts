@@ -1,4 +1,5 @@
-import steps, { Step } from '@/app/lib/configurator/steps';
+import steps from '@/app/lib/configurator/steps';
+import { Step } from '@/app/lib/configurator/types';
 import { NextRequest, NextResponse } from 'next/server';
 
 const POST = async (req: NextRequest) => {

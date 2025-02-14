@@ -39,7 +39,7 @@ export default function RootLayout({
       >
         <Container>
           <AppWrapper>
-            <Image src="/logo.jpg" alt="Warhammer logo" width={400} height={50} />
+            <Image src="/logo.jpg" alt="Warhammer logo" width={400} height={50} className="mb-8" />
             <div className="relative w-[calc(100%+6rem)] h-[200px] left-[-3rem]">
               <Image src="/top.webp" alt="Top forest" fill />
             </div>

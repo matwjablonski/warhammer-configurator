@@ -1,3 +1,6 @@
+import { Button } from '@/app/components/Button';
+import { Nav } from './styles';
+
 type NavigationProps = {
   shouldShowPrevBtn: boolean;
   shouldShowFinishBtn: boolean;
@@ -7,15 +10,19 @@ type NavigationProps = {
 }
 
 export const Navigation = ({ shouldShowFinishBtn, shouldShowNextBtn, shouldShowPrevBtn, nextStep, prevStep }: NavigationProps) => (
-  <nav>
+  <Nav>
+    <div>
     {
       shouldShowPrevBtn && <button onClick={prevStep}>WSTECZ</button>
     }
-    {
-      shouldShowFinishBtn && <button>ZAKOŃCZ</button>
-    }
-    {
-      shouldShowNextBtn && <button onClick={nextStep}>DALEJ</button>
-    }
-  </nav>
+    </div>
+    <div>
+      {
+        shouldShowFinishBtn && <button>ZAKOŃCZ</button>
+      }
+      {
+        shouldShowNextBtn && <Button onClick={nextStep} label="DALEJ" />
+      }
+    </div>
+  </Nav>
 )

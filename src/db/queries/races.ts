@@ -5,12 +5,18 @@ export const getAllRaces = async () => {
 }
 
 export const getRaceByDiceRoll = async (diceRoll: number) => {
-  return await db.race.findFirst({
-    where: {
-      AND: [
-        { minDiceRoll: { lte: diceRoll } },
-        { maxDiceRoll: { gte: diceRoll } },
-      ],
-    },
-  });
+  try {
+    const race = await db.race.findFirst({
+      where: {
+        AND: [
+          { minDiceRoll: { lte: diceRoll } },
+          { maxDiceRoll: { gte: diceRoll } },
+        ],
+      },
+    })
+    return race
+  } catch (error) {
+    console.error('Database query error:', error)
+    throw error
+  }
 }

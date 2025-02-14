@@ -1,27 +1,7 @@
-export enum QuestionType {
-  SYSTEM = 'system',
-  RACE = 'race',
-}
-
-export type Option = {
-  value: string;
-  label: string;
-}
-
-export type Question = {
-  question: string;
-  id: number;
-  type: QuestionType;
-  description?: string;
-  options?: Option[];
-}
-
-export type Step = {
-  title: string;
-  description?: string;
-  orderNo: number;
-  questions?: Question[];
-}
+import { step0Questions } from './questions/step0';
+import { step1DiceQuestions } from './questions/step1/dice';
+import { step2DiceQuestions } from './questions/step2/dice';
+import { Step } from './types';
 
 const steps: Step[] = [
   {
@@ -31,40 +11,18 @@ const steps: Step[] = [
       Zanim zaczniemy, musisz odpowiedzieć na kilka pytań. Konfigurator pomoże Ci stworzyć postać, która będzie pasować do Twojego stylu gry. Obliczyć statystyki. Jedyne czego potrzebujesz to kości do gry, kartkę i odrobinę wyobraźni.
     `,
     orderNo: 0,
-    questions: [
-      {
-        question: 'Wybierz proces tworzenia postaci',
-        id: 1,
-        type: QuestionType.SYSTEM,
-        options: [
-          {
-            value: 'dice', label: 'Będę rzucał kośćmi'
-          },
-          {
-            value: 'manual', label: 'Chcę wpisać ręcznie'
-          },
-          {
-            value: 'auto', label: 'Chcę, żeby system wylosował za mnie'
-          }
-        ]
-      }
-    ],
+    questions: step0Questions,
   },
   {
     title: 'Wybór rasy',
     description: 'W grze Warhammer Fantasy masz do wyboru 5 ras. Każda z nich ma swoje unikalne cechy i umiejętności. Wybierz jedną z nich.',
     orderNo: 1,
-    questions: [
-      {
-        question: 'Wybierz rasę',
-        id: 2,
-        type: QuestionType.RACE,
-      }
-    ],
+    questions: [ ...step1DiceQuestions ],
   },
   {
     title: 'Wybór klasy i profesji',
     orderNo: 2,
+    questions: [ ...step2DiceQuestions ],
   },
   {
     title: 'Przydział cech początkowych',

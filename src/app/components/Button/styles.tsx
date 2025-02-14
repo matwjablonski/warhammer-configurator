@@ -12,10 +12,27 @@ const buttonBase = `
   [&:disabled]:opacity-50
 `;
 
-export const ButtonBtn = ({ children, ...rest }: PropsWithChildren<ButtonHTMLAttributes<HTMLButtonElement>>) => (
+const outlinedButton = `
+  border-2
+  border-primary
+  text-primary
+  bg-transparent
+`;
+
+const smallButton = `
+  px-4
+  py-2
+  text-sm
+`;
+
+type ButtonBtnProps = PropsWithChildren<ButtonHTMLAttributes<HTMLButtonElement> & { outlined?: boolean, small?: boolean }>;
+
+export const ButtonBtn = ({ children, outlined, small, ...rest }: ButtonBtnProps) => (
   <button
     className={`
       ${buttonBase}
+      ${outlined ? outlinedButton : ''}
+      ${small ? smallButton : ''}
     `}
     {...rest}
   >

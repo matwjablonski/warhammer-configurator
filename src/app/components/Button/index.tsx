@@ -2,8 +2,14 @@ import { LinkProps } from 'next/link';
 import { ButtonBtn, LinkBtn } from './styles';
 import { ButtonHTMLAttributes } from 'react';
 
-type NotAsLinkProps = { asLink?: false; label: string; } & ButtonHTMLAttributes<HTMLButtonElement>;
-type AsLinkProps = { asLink: true; label: string; } & LinkProps;
+type CommonProps = {
+  label: string;
+  outlined?: boolean;
+  small?: boolean;
+}
+
+type NotAsLinkProps = { asLink?: false } & CommonProps & ButtonHTMLAttributes<HTMLButtonElement>;
+type AsLinkProps = { asLink: true; } & CommonProps & LinkProps;
 
 type ButtonProps = 
   | AsLinkProps
